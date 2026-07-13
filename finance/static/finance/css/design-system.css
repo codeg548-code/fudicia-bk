@@ -1,0 +1,818 @@
+/* Fudicia — Design System v3 (Ultra Luxury, Premium Dark & Liquid Gold) */
+
+@import url('modules/page-layout.css');
+@import url('modules/account.css');
+@import url('modules/nav.css');
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+    --ff-brand: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
+    --ff-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+    /* Colors — Refined Luxury FinTech Palette */
+    --color-bg-deep: #040406;
+    --color-bg-mid: #0a0a0f;
+    --color-accent: #f5c869;
+    --color-accent-soft: #fcefd2;
+    --color-accent-glow: rgba(245, 200, 105, 0.22);
+    --color-teal: #34d399;
+    --color-teal-soft: rgba(52, 211, 153, 0.1);
+
+    --color-text: #ffffff;
+    --color-text-muted: #94a3b8;
+    --color-text-dim: #64748b;
+
+    --color-success: #10b981;
+    --color-success-bg: rgba(16, 185, 129, 0.12);
+    --color-error: #f43f5e;
+    --color-error-bg: rgba(244, 63, 94, 0.12);
+    --color-warning: #f59e0b;
+    --color-warning-bg: rgba(245, 158, 11, 0.12);
+    --color-info: #38bdf8;
+    --color-info-bg: rgba(56, 189, 248, 0.12);
+
+    /* Glass & Borders 2.0 — High Contrast Frosted Specular */
+    --glass-bg: rgba(10, 10, 15, 0.7);
+    --glass-bg-light: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border-strong: rgba(255, 255, 255, 0.18);
+    --glass-blur: 24px;
+    --border-width: 1px;
+    --border-width-thick: 1.5px;
+
+    /* Radius — Curvier, modern organic corners */
+    --radius-xs: 0.5rem;
+    --radius-sm: 0.75rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-xl: 1.75rem;
+    --radius-pill: 9999px;
+
+    /* Shadows — Deep ambient occlusion */
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.7);
+    --shadow-glow: 0 0 25px var(--color-accent-glow);
+
+    /* Spacing scale */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2.25rem;
+
+    /* Layout */
+    --container-max: 420px;
+    --page-gutter: clamp(1rem, 5vw, 1.5rem);
+    --header-h: 3.5rem;
+    --bottom-nav-h: 4.5rem;
+    --touch-min: 2.75rem;
+
+    /* Responsive typography */
+    --text-xs: clamp(0.6875rem, 2vw, 0.75rem);
+    --text-sm: clamp(0.8125rem, 2.4vw, 0.875rem);
+    --text-base: clamp(0.9375rem, 3vw, 1rem);
+    --text-md: clamp(1rem, 3.2vw, 1.0625rem);
+    --text-lg: clamp(1.125rem, 3.8vw, 1.25rem);
+    --text-xl: clamp(1.3125rem, 4.5vw, 1.5rem);
+    --text-2xl: clamp(1.625rem, 5.5vw, 1.875rem);
+    --text-balance: clamp(1.25rem, 6vw, 1.75rem);
+
+    --transition: cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--ff-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text);
+    background: var(--color-bg-deep);
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Background Atmospheric Radial Mesh */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle 250px at 50% -10%, rgba(245, 200, 105, 0.15), transparent),
+        radial-gradient(circle 350px at 90% 80%, rgba(52, 211, 153, 0.08), transparent),
+        linear-gradient(180deg, #050508 0%, #0a0a0f 100%);
+    z-index: -2;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('../images/logoFond.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.03;
+    z-index: -1;
+    pointer-events: none;
+    filter: saturate(0.5);
+}
+
+a { color: inherit; text-decoration: none; transition: var(--transition); }
+img { max-width: 100%; height: auto; display: block; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul { list-style: none; }
+
+/* ─── Layout shell ─── */
+.ff-app {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.ff-main {
+    flex: 1;
+    width: 100%;
+    padding: var(--space-5) var(--page-gutter) calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px) + var(--space-6));
+}
+
+.ff-main--auth {
+    padding-bottom: calc(var(--space-8) + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ─── Header ─── */
+.ff-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: env(safe-area-inset-top, 0px) var(--page-gutter) 0;
+    background: rgba(4, 4, 6, 0.75);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-bottom: var(--border-width) solid var(--glass-border);
+}
+
+.ff-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--ff-brand);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    letter-spacing: -0.03em;
+}
+
+.ff-logo-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--color-accent) 0%, #b47b00 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-md);
+    color: #000000;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(245, 200, 105, 0.3);
+}
+
+.ff-logo-text {
+    background: linear-gradient(90deg, #ffffff 30%, var(--color-accent-soft) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.ff-header-btn {
+    width: var(--touch-min);
+    height: var(--touch-min);
+    border-radius: 50%;
+    border: var(--border-width) solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.ff-header-btn:hover {
+    background: var(--glass-bg-light);
+    border-color: var(--glass-border-strong);
+    color: var(--color-accent);
+    transform: scale(1.05);
+}
+
+/* ─── Bottom Navigation — Curved Premium Floating Bar ─── */
+.ff-bottom-nav {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 1.5rem);
+    max-width: calc(var(--container-max) - 1.5rem);
+    min-height: var(--bottom-nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    z-index: 200;
+}
+
+.ff-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.2rem;
+    color: var(--color-text-dim);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-md);
+}
+
+.ff-nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: var(--radius-sm);
+}
+
+.ff-nav-item i {
+    font-size: 1.1rem;
+}
+
+.ff-nav-item:hover {
+    color: var(--color-text-muted);
+}
+
+.ff-nav-item.active {
+    color: var(--color-accent);
+}
+
+.ff-nav-item.active .ff-nav-icon {
+    background: rgba(245, 200, 105, 0.12);
+    color: var(--color-accent);
+    box-shadow: inset 0 0 0 1px rgba(245, 200, 105, 0.25);
+}
+
+.ff-nav-item--center {
+    position: relative;
+    top: -1.25rem;
+}
+
+.ff-nav-item--center .ff-nav-icon--center {
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-accent), #c28500);
+    color: #000000;
+    box-shadow: 0 8px 25px rgba(245, 200, 105, 0.4);
+}
+
+.ff-nav-item--center.active .ff-nav-icon--center {
+    transform: scale(1.05) rotate(45deg);
+}
+
+/* ─── Shared Surface (Crisp glass morphism) ─── */
+.ff-surface {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--border-width) solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.ff-card {
+    background: rgba(14, 14, 22, 0.65);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: var(--border-width) solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-sm);
+}
+
+.ff-card + .ff-card {
+    margin-top: var(--space-5);
+}
+
+.ff-card-title {
+    font-family: var(--ff-brand);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-5);
+    opacity: 0.9;
+}
+
+/* ─── Wallet Hero (Sleek Dark Premium Card) ─── */
+.ff-wallet {
+    background: linear-gradient(145deg, #0f0f17 0%, #06060a 100%);
+    border: var(--border-width) solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    margin-bottom: var(--space-5);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.ff-wallet::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(245, 200, 105, 0.08), transparent 70%);
+    pointer-events: none;
+}
+
+.ff-wallet-user {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.ff-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.03);
+    border: var(--border-width) solid var(--glass-border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-lg);
+    color: var(--color-accent);
+    font-family: var(--ff-brand);
+}
+
+.ff-wallet-name {
+    font-family: var(--ff-brand);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    letter-spacing: -0.01em;
+}
+
+.ff-wallet-phone {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
+
+.ff-balance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.ff-balance-item {
+    padding: var(--space-4);
+    background: rgba(255, 255, 255, 0.02);
+    border: var(--border-width) solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-md);
+}
+
+.ff-balance-item label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-dim);
+    margin-bottom: var(--space-2);
+}
+
+.ff-balance-value {
+    font-family: var(--ff-brand);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+}
+
+.ff-balance-unit {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    margin-top: var(--space-1);
+}
+
+.ff-wallet-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+}
+
+/* ─── Buttons ─── */
+.ff-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    transition: var(--transition);
+    border: var(--border-width) solid transparent;
+}
+
+.ff-btn-primary {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+.ff-btn-primary:hover:not(:disabled) {
+    background: var(--color-accent);
+    box-shadow: 0 4px 25px var(--color-accent-glow);
+    transform: translateY(-1.5px);
+}
+
+.ff-btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--glass-border);
+    color: #ffffff;
+}
+
+.ff-btn-secondary:hover:not(:disabled) {
+    background: var(--glass-bg-light);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1.5px);
+}
+
+.ff-btn-danger {
+    background: rgba(244, 63, 94, 0.1);
+    border-color: rgba(244, 63, 94, 0.2);
+    color: var(--color-error);
+}
+
+.ff-btn-success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+    color: var(--color-success);
+}
+
+/* Floating service button — Clean minimalist capsule */
+.ff-float-btn {
+    position: fixed;
+    right: var(--page-gutter);
+    bottom: calc(var(--bottom-nav-h) + var(--page-gutter) + 0.5rem);
+    height: 3.25rem;
+    border-radius: var(--radius-pill);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 1200;
+    border: none;
+}
+
+.ff-float-icon { color: #000000; font-size: 1.1rem; }
+.ff-float-label { font-weight: 700; color: #000000; font-size: 0.85rem; letter-spacing: 0.02em; margin-left: 0.5rem; }
+
+/* ─── Quick Actions Grid ─── */
+.ff-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.ff-action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    min-height: 6rem;
+    padding: var(--space-4) var(--space-2);
+    background: rgba(255,255,255,0.01);
+    border: var(--border-width) solid var(--glass-border);
+    border-radius: var(--radius-md);
+}
+
+.ff-action-item:hover {
+    border-color: var(--glass-border-strong);
+    background: rgba(255, 255, 255, 0.03);
+    transform: translateY(-2px);
+}
+
+.ff-action-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.03);
+    border: var(--border-width) solid var(--glass-border);
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.ff-action-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+}
+
+/* ─── Forms — Pure Jet-Black Inputs ─── */
+.ff-form-card {
+    background: var(--color-bg-mid);
+    border: var(--border-width) solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6) var(--space-5);
+    box-shadow: var(--shadow-md);
+}
+
+.ff-form-title {
+    font-family: var(--ff-brand);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--space-2);
+    letter-spacing: -0.02em;
+}
+
+.ff-form-subtitle {
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+}
+
+.ff-form-group label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+}
+
+.ff-input {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.75rem 1.125rem;
+    background: #000000;
+    border: var(--border-width-thick) solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: #ffffff;
+    font-size: var(--text-base);
+}
+
+.ff-input:focus {
+    outline: none;
+    border-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.06);
+}
+
+.ff-form-footer a {
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* ─── Page Titles ─── */
+.ff-page-title {
+    font-family: var(--ff-brand);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--space-6);
+    letter-spacing: -0.02em;
+}
+
+.ff-page-title span {
+    color: var(--color-accent);
+}
+
+/* ─── Tables ─── */
+.ff-table-wrap {
+    border-radius: var(--radius-md);
+    border: var(--border-width) solid var(--glass-border);
+    background: rgba(0,0,0,0.2);
+}
+
+.ff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+}
+
+.ff-table thead {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.ff-table th {
+    padding: var(--space-4) var(--space-3);
+    text-align: left;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-dim);
+    border-bottom: var(--border-width) solid var(--glass-border);
+}
+
+.ff-table td {
+    padding: var(--space-4) var(--space-3);
+    border-top: var(--border-width) solid rgba(255, 255, 255, 0.03);
+    color: var(--color-text-muted);
+}
+
+.ff-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.ff-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-xs);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.ff-badge--success { background: var(--color-success-bg); color: var(--color-success); }
+.ff-badge--error { background: var(--color-error-bg); color: var(--color-error); }
+.ff-badge--warning { background: var(--color-warning-bg); color: var(--color-warning); }
+
+/* ─── Pack Cards — Striking FinTech Products ─── */
+.ff-pack-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.ff-pack-card {
+    display: flex;
+    align-items: stretch;
+    background: linear-gradient(135deg, #0e0e14 0%, #07070a 100%);
+    border: var(--border-width) solid var(--glass-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.ff-pack-card:hover {
+    border-color: var(--glass-border-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.ff-pack-img {
+    width: 4.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: var(--border-width) solid var(--glass-border);
+}
+
+.ff-pack-img h3 {
+    font-family: var(--ff-brand);
+    font-size: var(--text-md);
+    color: var(--color-accent);
+}
+
+.ff-pack-info {
+    flex: 1;
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.ff-pack-title {
+    font-family: var(--ff-brand);
+    font-size: var(--text-md);
+    font-weight: 700;
+}
+
+.ff-pack-subtitle {
+    font-size: var(--text-xs);
+    color: var(--color-text-dim);
+}
+
+.ff-pack-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+}
+
+.ff-pack-metric {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-xs);
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.ff-pack-metric__label {
+    display: block;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+}
+
+.ff-pack-metric__value {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: var(--text-sm);
+}
+
+.ff-pack-buy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: var(--border-width) solid var(--glass-border);
+    padding: var(--space-3);
+}
+
+/* ─── Modals & Drawers ─── */
+.ff-overlay {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+}
+
+.ff-modal {
+    background: var(--color-bg-deep);
+    border: var(--border-width) solid var(--glass-border-strong);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+}
+
+.ff-drawer {
+    background: var(--color-bg-mid);
+    border: var(--border-width) solid var(--glass-border-strong);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: var(--space-6) var(--page-gutter) var(--space-5);
+}
+
+.ff-drawer-title {
+    font-family: var(--ff-brand);
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+}
+
+.ff-drawer-link {
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+}
+
+.ff-drawer-link:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: #ffffff;
+}
+
+/* ─── Toast Perfect Contrast ─── */
+.ff-toast-container {
+    color: #ffffff;
+    font-weight: 600;
+}
