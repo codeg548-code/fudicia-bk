@@ -179,7 +179,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = False
 # SESSION_COOKIE_SAMESITE = 'Lax'
 # CSRF_COOKIE_SAMESITE = 'Lax'
 
@@ -245,5 +245,6 @@ CORS_ALLOW_METHODS = [
 
 CSRF_TRUSTED_ORIGINS = [
     'https://fudicia.onrender.com',
+    'fudicia.onrender.com',
     'https://fudicia-backend.onrender.com',
 ]
