@@ -245,6 +245,5 @@ CORS_ALLOW_METHODS = [
 
 CSRF_TRUSTED_ORIGINS = [
     'https://fudicia.onrender.com',
-    'fudicia.onrender.com',
     'https://fudicia-backend.onrender.com',
 ]
